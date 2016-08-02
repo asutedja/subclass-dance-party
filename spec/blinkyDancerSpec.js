@@ -24,7 +24,7 @@ describe('blinkyDancer', function() {
       expect(blinkyDancer.step.callCount).to.be.equal(0);
       console.log(blinkyDancer.step.called);
       //blinkyDancer = new makeBlinkyDancer(10, 20, timeBetweenSteps);
-      clock.tick(timeBetweenSteps);
+      //clock.tick(timeBetweenSteps);
       clock.tick(timeBetweenSteps);
       console.log(blinkyDancer.step.called);
       expect(blinkyDancer.step.callCount).to.be.equal(1);
