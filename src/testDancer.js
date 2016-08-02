@@ -13,6 +13,15 @@ makeTestDancer.prototype.constructor = makeTestDancer;
 
 makeTestDancer.prototype.step = function() {
   makeDancer.prototype.step.call(this);
-  this.$node.toggle();
+  this.move();
+};
 
+makeTestDancer.prototype.move = function() {
+  var pot = Math.random() * 1000;
+  var left = Math.random() * 1000;
+  var styleSettings = {
+    top: pot,
+    left: left
+  };
+  this.$node.css(styleSettings);
 };
