@@ -32,7 +32,8 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 makeDancer.prototype.step = function() {
   var context = this;
   console.log(context);
-  setTimeout( function() { context.step.call(context); }, this.timeBetweenSteps);
+  //setTimeout( function() { context.step.apply(context); }, this.timeBetweenSteps);
+  setTimeout(this.step.bind(context), this.timeBetweenSteps);
 };
 
 makeDancer.prototype.setPosition = function(top, left) {
