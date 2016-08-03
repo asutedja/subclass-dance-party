@@ -1,4 +1,4 @@
-// var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
+// var makePokeball = function(top, left, timeBetweenSteps) {
 //   var blinkyDancer = makeDancer(top, left, timeBetweenSteps);
 
 //   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
@@ -18,24 +18,28 @@
 //   return blinkyDancer;
 // };
 
-var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
+var makePokeball = function(top, left, timeBetweenSteps) {
   //var obj = Object.create(prototype);
   makeDancer.call(this, top, left, timeBetweenSteps);
 
   this.top = top;
   this.left = left;
+  var toptop = this.top;
+  var leftleft = this.left;
+
   console.log(this.left + ' ' + this.top);
   //return obj
   this.$node = $('<span class="dancer"></span>').click(function() {
-    var newTop = Math.floor(Math.random() * 700);
-    var newLeft = Math.floor(Math.random() * 1000);
+    console.log(this.top);
+    var newTop = toptop + (Math.random() * 260);       //Math.floor(Math.random() * 700);
+    var newLeft = leftleft + (Math.random() * 260);     //Math.floor(Math.random() * 1000);
     $(this).animate({
       top: newTop,
       left: newLeft
     });  
     this.left = newLeft;
     this.top = newTop;
-    //console.log(this.left + ' ' + this.top);
+    console.log(this.left + ' ' + this.top);
 
 
     for (var i = 0; i < window.dancers.length; i++) {
@@ -55,21 +59,21 @@ var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
 };
 
 
-makeBlinkyDancer.prototype = Object.create(makeDancer.prototype);
-makeBlinkyDancer.prototype.constructor = makeBlinkyDancer;
+makePokeball.prototype = Object.create(makeDancer.prototype);
+makePokeball.prototype.constructor = makePokeball;
 
 
-makeBlinkyDancer.prototype.step = function() {
+makePokeball.prototype.step = function() {
   makeDancer.prototype.step.call(this);
 
 
 };
 
-makeBlinkyDancer.prototype.position = function() {
+makePokeball.prototype.position = function() {
   return {top: this.top, left: this.left};
 };
 
-makeBlinkyDancer.prototype.lineup = function(top, left) {
+makePokeball.prototype.lineup = function(top, left) {
 
   var styleSettings = {
     top: top,
