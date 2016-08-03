@@ -27,20 +27,28 @@ var makePokeball = function(top, left, timeBetweenSteps) {
   var toptop = this.top;
   var leftleft = this.left;
 
-  console.log(this.left + ' ' + this.top);
+  //console.log('this is before click   ' + this.left + ' ' + this.top);
   //return obj
-  this.$node = $('<span class="dancer"></span>').click(function() {
-    console.log(this.top);
-    var newTop = toptop + (Math.random() * 260);       //Math.floor(Math.random() * 700);
-    var newLeft = leftleft + (Math.random() * 260);     //Math.floor(Math.random() * 1000);
+ 
+  this.$node = $('<span class="dancer"></span>').click(function(event) {
+    var randomizer = function() {
+      if (Math.random() > 0.5) {
+        return -1;
+      }
+      return 1;
+    };
+    
+    var newTop = Math.floor(Math.random() * 700);//toptop + (Math.random() * randomizer() * 60);       
+    var newLeft = Math.floor(Math.random() * 1000);//leftleft + (Math.random() * randomizer() * 60);     
     $(this).animate({
       top: newTop,
       left: newLeft
     });  
-    this.left = newLeft;
+    leftleft = newLeft;
+    toptop = newTop;
     this.top = newTop;
-    console.log(this.left + ' ' + this.top);
-
+    this.left = newLeft;
+    //console.log('This is the actual coordinates:' + this.left + ' ' + this.top);
 
     for (var i = 0; i < window.dancers.length; i++) {
       var l = window.dancers[i].left - this.left;
