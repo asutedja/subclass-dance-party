@@ -1,11 +1,17 @@
 var makeTestDancer = function(top, left, timeBetweenSteps) {
   //var obj = Object.create(prototype);
   makeDancer.call(this, top, left, timeBetweenSteps);
+  this.left = left;
+  this.top = top;
   
-  this.$node = $('<span class="testdancer"></span>').click(function() {
+  this.$node = $('<span class="testdancer pokemon"></span>').click(function() {
     //$(this).css('background-image', url('http://24.media.tumblr.com/tumblr_m9a6eqNYze1qfqgb9o1_250.gif'));
-    $(this).remove();
-    window.dancers.pop;
+    var newTop = Math.floor(Math.random() * 700);
+    var newLeft = Math.floor(Math.random() * 1000);
+    $(this).animate({
+      top: newTop,
+      left: newLeft
+    });  
   });
   this.setPosition(top, left);
 };
@@ -17,12 +23,7 @@ makeTestDancer.prototype.constructor = makeTestDancer;
 
 makeTestDancer.prototype.step = function() {
   makeDancer.prototype.step.call(this);
-  // var newTop = Math.floor(Math.random() * 700);
-  // var newLeft = Math.floor(Math.random() * 1000);
-  // this.$node.animate({
-  //   top: newTop,
-  //   left: newLeft
-  // });  
+
 
   var newRotate = 'rotate(' + Math.random() * 360 + 'deg)';
   var rotate = {
@@ -35,12 +36,14 @@ makeTestDancer.prototype.step = function() {
 
 
 makeTestDancer.prototype.lineup = function(top, left) {
-  this.$node.addClass('lineup');
-  this.$node.removeClass('testdancer');
   var styleSettings = {
     top: top,
     left: left
   };
 
   this.$node.css(styleSettings);
+};
+
+makeTestDancer.prototype.position = function() {
+  return {top: this.top, left: this.left};
 };

@@ -10,6 +10,8 @@ $(document).ready(function() {
     }
   });
 
+
+
   
 
   $('.addDancerButton').on('click', function(event) {

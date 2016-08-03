@@ -21,7 +21,37 @@
 var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
   //var obj = Object.create(prototype);
   makeDancer.call(this, top, left, timeBetweenSteps);
+
+  this.top = top;
+  this.left = left;
+  console.log(this.left + ' ' + this.top);
   //return obj
+  this.$node = $('<span class="dancer"></span>').click(function() {
+    var newTop = Math.floor(Math.random() * 700);
+    var newLeft = Math.floor(Math.random() * 1000);
+    $(this).animate({
+      top: newTop,
+      left: newLeft
+    });  
+    this.left = newLeft;
+    this.top = newTop;
+    //console.log(this.left + ' ' + this.top);
+
+
+    for (var i = 0; i < window.dancers.length; i++) {
+      var l = window.dancers[i].left - this.left;
+      var t = window.dancers[i].top - this.top;
+      var c = Math.sqrt(l * l + t * t);
+      //console.log(this.left + ' ' + this.top);
+      if (c < 130) {
+        if (window.dancers[i].$node.hasClass('pokemon')) {
+          window.dancers[i].$node.fadeOut();
+        }
+      } 
+    }
+    
+  });
+  this.setPosition(top, left);
 };
 
 
@@ -31,8 +61,12 @@ makeBlinkyDancer.prototype.constructor = makeBlinkyDancer;
 
 makeBlinkyDancer.prototype.step = function() {
   makeDancer.prototype.step.call(this);
-  this.$node.toggle();
 
+
+};
+
+makeBlinkyDancer.prototype.position = function() {
+  return {top: this.top, left: this.left};
 };
 
 makeBlinkyDancer.prototype.lineup = function(top, left) {
